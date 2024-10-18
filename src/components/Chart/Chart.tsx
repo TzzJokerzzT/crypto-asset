@@ -1,4 +1,4 @@
-import { AssetTrackerContextProps } from "../../types/types.env";
+import { AssetTrackerContextProps, ChartProps } from "../../types/types.env";
 import { AssetTrackerStoreContext } from "@context/assetTrackerStore";
 import {
   Area,
@@ -11,7 +11,7 @@ import {
 } from "keep-react";
 import { useContext } from "react";
 
-const ChartComponent = ({ dataCoin }) => {
+const ChartComponent = ({ dataCoin }: ChartProps) => {
   const { period } = useContext(
     AssetTrackerStoreContext
   ) as AssetTrackerContextProps;

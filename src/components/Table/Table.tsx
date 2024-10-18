@@ -28,7 +28,7 @@ import ModalComponent from "@components/Modal/Modal";
 import ChartComponent from "@components/Chart/Chart";
 
 const TableComponent = ({ coinData, tableName, infoTable }: TableProps) => {
-  const { onSymbol, onFavorite, dataCoins } = useContext(
+  const { onSymbol, dataCoins } = useContext(
     AssetTrackerStoreContext
   ) as AssetTrackerContextProps;
 
@@ -131,7 +131,6 @@ const TableComponent = ({ coinData, tableName, infoTable }: TableProps) => {
                   </div>
                   <Star
                     className="size-4 cursor-pointer"
-                    // onClick={() => onFavorite(id)}
                   />
                 </TableCell>
                 <TableCell className="flex items-center justify-center">

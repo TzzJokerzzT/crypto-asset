@@ -48,3 +48,7 @@ export interface ModalProps {
   children: React.ReactNode;
   btnmodal: React.ReactNode;
 }
+
+export interface ChartProps {
+  dataCoin: CryptoDataCoins[];
+}

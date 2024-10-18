@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { API_URL, DATA_URL } from "../util/data";
 import { createContext } from "react";
 import {
   AssetTrackerContextProps,
@@ -7,7 +6,7 @@ import {
   CryptoData,
   CryptoDataCoins,
 } from "../types/types.env";
-import { useLocalStorage } from "@hook/useLocalStorage";
+
 
 export interface AssestTrackerProps {
   children: React.ReactNode;
