@@ -8,7 +8,11 @@ const Favorite = () => {
   return (
     <LayoutPage>
       <Suspense fallback={<SpinnerComponent />}>
-        <TableComponent coinData={data} />
+        <TableComponent
+          coinData={data}
+          tableName={"Favorite Coins"}
+          infoTable={"100 coins"}
+        />
       </Suspense>
     </LayoutPage>
   );

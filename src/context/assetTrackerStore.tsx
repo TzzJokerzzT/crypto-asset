@@ -7,6 +7,7 @@ import {
   CryptoData,
   CryptoDataCoins,
 } from "../types/types.env";
+import { useLocalStorage } from "@hook/useLocalStorage";
 
 export interface AssestTrackerProps {
   children: React.ReactNode;
@@ -17,13 +18,17 @@ export const AssetTrackerStoreContext =
 
 export const AssetTrackerStoreProvider = ({ children }: AssetTrackerProps) => {
   const [data, setData] = useState<CryptoData[]>([]);
+  // const [favoriteCoins, setFavoriteCoins] = useLocalStorage<CryptoData[]>(
+  //   "favorite",
+  //   []
+  // );
   const [dataCoins, setDataCoins] = useState<CryptoDataCoins[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [symbol, setSymbol] = useState("bitcoin");
-  const [period, setPeriod] = useState(7);
+  const [period, setPeriod] = useState(1);
 
-  console.log(symbol);
+  // console.log(favoriteCoins);
 
   //Handler Functions
   const handleSymbolChange = (symbol: string) => {
@@ -52,23 +57,23 @@ export const AssetTrackerStoreProvider = ({ children }: AssetTrackerProps) => {
     fetchData();
   }, []);
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   const fetchDataCoin = async () => {
-  //     try {
-  //       const response = await fetch(
-  //         `https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=${period}&precision=1`
-  //       );
-  //       const data = await response.json();
-  //       setDataCoins(data.prices);
-  //     } catch (error) {
-  //       setError(`Error geting the information: ${error}`);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
-  //   fetchDataCoin();
-  // }, [period, symbol]);
+  useEffect(() => {
+    setLoading(true);
+    const fetchDataCoin = async () => {
+      try {
+        const response = await fetch(
+          `https://api.coingecko.com/api/v3/coins/${symbol}/market_chart?vs_currency=usd&days=${period}&precision=1`
+        );
+        const data = await response.json();
+        setDataCoins(data.prices);
+      } catch (error) {
+        setError(`Error geting the information: ${error}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDataCoin();
+  }, [period, symbol]);
 
   return (
     <AssetTrackerStoreContext.Provider

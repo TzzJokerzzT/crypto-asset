@@ -26,10 +26,9 @@ import { useContext } from "react";
 import { AssetTrackerStoreContext } from "@context/assetTrackerStore";
 import ModalComponent from "@components/Modal/Modal";
 import ChartComponent from "@components/Chart/Chart";
-import { prices } from "../../../prices.json";
 
-const TableComponent = ({ coinData }: TableProps) => {
-  const { onSymbol } = useContext(
+const TableComponent = ({ coinData, tableName, infoTable }: TableProps) => {
+  const { onSymbol, onFavorite, dataCoins } = useContext(
     AssetTrackerStoreContext
   ) as AssetTrackerContextProps;
 
@@ -39,9 +38,9 @@ const TableComponent = ({ coinData }: TableProps) => {
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-5">
             <h2 className="text-heading-6 font-semibold text-metal-900 dark:text-white">
-              Coins
+              {tableName}
             </h2>
-            <Badge color="secondary">100 Orders</Badge>
+            <Badge color="secondary">{infoTable}</Badge>
           </div>
           <div className="flex items-center gap-5">
             <Button variant="outline" className="gap-1.5">
@@ -127,10 +126,13 @@ const TableComponent = ({ coinData }: TableProps) => {
                         </p>
                       }
                     >
-                      <ChartComponent dataCoin={prices} />
+                      <ChartComponent dataCoin={dataCoins} />
                     </ModalComponent>
                   </div>
-                  <Star className="size-4 cursor-pointer" />
+                  <Star
+                    className="size-4 cursor-pointer"
+                    // onClick={() => onFavorite(id)}
+                  />
                 </TableCell>
                 <TableCell className="flex items-center justify-center">
                   <img className="h-10 w-10" src={image} alt={`logo ${name}`} />

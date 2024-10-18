@@ -1,3 +1,5 @@
+import { AssetTrackerContextProps } from "../../types/types.env";
+import { AssetTrackerStoreContext } from "@context/assetTrackerStore";
 import {
   Area,
   AreaChart,
@@ -7,10 +9,40 @@ import {
   ChartTooltip,
   CustomTooltip,
 } from "keep-react";
+import { useContext } from "react";
 
 const ChartComponent = ({ dataCoin }) => {
+  const { period } = useContext(
+    AssetTrackerStoreContext
+  ) as AssetTrackerContextProps;
+
+  const formatDateByPeriod = (timestamp: number, period: number): string => {
+    const date = new Date(timestamp);
+
+    switch (period) {
+      case 1:
+        // Mostrar la hora
+        return date.toLocaleTimeString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      case 7:
+        // Mostrar el día de la semana
+        return date.toLocaleDateString([], { weekday: "long" });
+      case 30:
+        // Mostrar el día del mes
+        return date.toLocaleDateString([], { day: "numeric", month: "long" });
+      case 365:
+        // Mostrar el mes del año
+        return date.toLocaleDateString([], { month: "long" });
+      default:
+        // Por defecto, mostrar la fecha completa
+        return date.toLocaleDateString();
+    }
+  };
+
   const data = dataCoin.map(([timestamp, price]) => ({
-    name: new Date(timestamp).toLocaleDateString(),
+    name: formatDateByPeriod(timestamp, period),
     price,
   }));
 

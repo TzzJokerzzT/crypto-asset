@@ -40,6 +40,8 @@ export interface LayoutPageProps {
 
 export interface TableProps {
   coinData: CryptoData[];
+  tableName: string;
+  infoTable: string;
 }
 
 export interface ModalProps {
