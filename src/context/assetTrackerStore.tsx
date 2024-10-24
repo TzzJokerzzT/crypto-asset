@@ -6,7 +6,7 @@ import {
   CryptoData,
   CryptoDataCoins,
 } from "../types/types.env";
-
+import { useLocalStorage } from "@hook/useLocalStorage";
 
 export interface AssestTrackerProps {
   children: React.ReactNode;
@@ -22,12 +22,17 @@ export const AssetTrackerStoreProvider = ({ children }: AssetTrackerProps) => {
   //   []
   // );
   const [dataCoins, setDataCoins] = useState<CryptoDataCoins[]>([]);
+  // const [dataCoins, setDataCoins] = useLocalStorage<CryptoDataCoins[]>(
+  //   "datacoin",
+  //   []
+  // );
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [symbol, setSymbol] = useState("bitcoin");
   const [period, setPeriod] = useState(1);
 
-  // console.log(favoriteCoins);
+  console.log(dataCoins);
 
   //Handler Functions
   const handleSymbolChange = (symbol: string) => {
